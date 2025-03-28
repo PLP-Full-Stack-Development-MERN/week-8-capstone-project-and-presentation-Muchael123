@@ -4,16 +4,10 @@ import jwt from "jsonwebtoken";
 
 export default async function Login(req, res) {
   try {
-    const { password, username } = req.body;
-    let user;
-    user = await User
-        .findOne({ username
-        });
-    if(!user){
-      user = await User
-      .findOne({ email: username
-      });
-    }
+    const { password, email } = req.body;
+    
+      const user = await User
+      .findOne({ email })
 
     if (!user) {
       return res.status(400).json({ message: "Invalid email or password" });
@@ -28,7 +22,7 @@ export default async function Login(req, res) {
       return res.status(400).json({ message: "Invalid email or password" });
     }
     const token = jwt.sign(
-      { id: user._id, role: user.role },
+      { id: user._id },
       process.env.JWT_SECRET,
       { expiresIn: "30d" }
     );

@@ -21,7 +21,8 @@ export default function CodeEmail(
   <div class="container">
     <h2>Welcome to Story-Yetu! 🎉</h2>
     <img 
-    src="https://res.cloudinary.com/dk5bvgq20/image/upload/v1633666824/Story-Yetu/Story-Yetu_Logo_2x" 
+    
+    src="https://res.cloudinary.com/dwdhxgvsl/image/upload/c_fill,g_auto,h_250,w_970/b_rgb:000000,e_gradient_fade,y_-0.50/c_scale,co_rgb:ffffff,fl_relative,l_text:montserrat_25_style_light_align_center:Shop%20Now,w_0.5,y_0.18/v1743164874/story-yetu/logo_frgai5.png" 
     alt="Story-Yetu Logo" 
     width="100" 
     height="100">

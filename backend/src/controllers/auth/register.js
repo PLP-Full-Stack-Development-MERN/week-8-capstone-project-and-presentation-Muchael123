@@ -2,21 +2,14 @@ import SendEmail from "../../lib/sendMail.js";
 import CodeEmail from "../../static/codeEmail.js";
 import User from "../../models/user.js";
 import bcrypt from "bcryptjs";
-import generateVerificationCode from "../lib/gencode.js";
+import generateVerificationCode from "../../lib/gencode.js";
 
-export default async function RegisterUser(req, res){
+export default async function Register(req, res){
    try{
    const {email, password, username} = req.body;
-   const userExist = await User
-   .findOne({username})
-   if(userExist) return res.status(409).json({message: "Username already exists"})
-
    const userExists = await User.findOne({ email });
-   
-
    if (userExists) return res.status(409).json({ message: 'User with the Email already exists' });
 
-  
     const token = generateVerificationCode();
 
     const salt = bcrypt.genSaltSync(10);

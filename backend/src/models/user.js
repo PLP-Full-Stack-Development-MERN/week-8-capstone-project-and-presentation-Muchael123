@@ -1,11 +1,12 @@
+
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    password: String,
-    coins: Number,
-    verified: Boolean,
+    username: {type: String, required: true},
+    email: {type:String, required: true},
+    password: {type: String,required: true},
+    coins: {type: Number, default: 0, required: true},
+    verified: {type:Boolean, default:false, required: true},
     AuthCode: {
         token: String,
         expiry: Date
