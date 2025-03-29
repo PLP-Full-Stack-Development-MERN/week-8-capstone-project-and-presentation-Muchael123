@@ -5,7 +5,7 @@ const Navbar = () => {
   const { user, login, logout } = useAuth();
 
   return (
-    <nav className="sticky top-0 z-40 w-full border-b backdrop-blur-lg bg-background/70">
+    <nav className="sticky top-0 z-40 w-full border-b backdrop-blur-lg ">
       <div className="flex px-6 h-16 max-w-full items-center justify-between">
         <div className="flex items-center">
           <Link to="/" className="flex flex-row gap-2 items-center">

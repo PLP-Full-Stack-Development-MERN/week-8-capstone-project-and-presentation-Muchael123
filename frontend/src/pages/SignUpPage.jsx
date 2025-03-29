@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { toast } from 'react-toastify';
+import useAuthStore from '../context/authStore';
 
 const SignUpPage = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +15,7 @@ const SignUpPage = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -58,20 +61,52 @@ const SignUpPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       setIsLoading(true);
-
-      // Simulate API call for registration
-      setTimeout(() => {
+      try{
+       const res = await fetch(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/auth/signup`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password,
+            username: formData.name,
+          }),
+       });
+      if (!res.ok) {
+        const data = await res.json();
+        toast.error(data.message);
+        return;
+      }
+        const data = await res.json();
+        if (res.ok) {
+          toast.success('Account created successfully! Please check your email to verify your account.');
+          setFormData({
+            name: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          });
+          setErrors({});
+          //set email in zustand store
+          useAuthStore.setState({email: formData.email});
+          //redirect to confirm email page
+          navigate('/confirm-email');
+          
+        }
+      } catch (error) {
+        toast.error(error.message || 'An error occurred. Please try again');
+      } finally {
         setIsLoading(false);
-        // Redirect to dashboard or login page after successful registration
-        window.location.href = '/sign-in';
-      }, 1500);
+      }
     }
   };
+
 
   return (
     <div className="min-h-[calc(100vh-64px)] grid grid-cols-1 md:grid-cols-2">
@@ -97,7 +132,7 @@ const SignUpPage = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                className={`w-full px-4 py-2 border rounded-lg  focus:outline-none focus:ring-2 focus:ring-primary ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                 placeholder="Enter your full name"
               />
               {errors.name && <p className="mt-1 text-red-500 text-sm">{errors.name}</p>}

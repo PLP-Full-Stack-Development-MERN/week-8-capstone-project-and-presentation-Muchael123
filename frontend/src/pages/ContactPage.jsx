@@ -46,12 +46,12 @@ const ContactPage = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <h1 className="text-4xl font-bold text-primary mb-2 text-center">Contact Us</h1>
+      <h1 className="text-4xl font-bold text-[#5253A3] mb-2 text-center">Contact Us</h1>
       <p className="text-lg text-center mb-12">Have questions or suggestions? We'd love to hear from you!</p>
 
       <div className="bg-white rounded-xl shadow-md overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="bg-primary text-white p-8 flex flex-col justify-between">
+          <div className="bg-[#5253A3] text-white p-8 flex flex-col justify-between">
             <div>
               <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
               <p className="mb-8">Feel free to reach out to us with any questions about Story Yetu. We're here to help you create magical stories for children!</p>
@@ -73,7 +73,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <p className="text-sm text-white/70">Phone</p>
-                    <p className="font-medium">+1 (123) 456-7890</p>
+                    <p className="font-medium">+254 7123 456-78</p>
                   </div>
                 </div>
 
@@ -83,7 +83,7 @@ const ContactPage = () => {
                   </div>
                   <div>
                     <p className="text-sm text-white/70">Address</p>
-                    <p className="font-medium">123 Story Lane, San Francisco, CA 94103</p>
+                    <p className="font-medium">123 Nairobi, Kenya</p>
                   </div>
                 </div>
               </div>
@@ -117,7 +117,7 @@ const ContactPage = () => {
           </div>
 
           <div className="p-8">
-            <h2 className="text-2xl font-bold text-primary mb-6">Send a Message</h2>
+            <h2 className="text-2xl font-bold text-[#5253A3] mb-6">Send a Message</h2>
 
             {submitted ? (
               <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-6">
@@ -128,56 +128,56 @@ const ContactPage = () => {
 
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label htmlFor="name" className="block text-primary font-medium mb-2">Your Name</label>
+                <label htmlFor="name" className="block text-[#5253A3] font-medium mb-2">Your Name</label>
                 <input
                   type="text"
                   id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5253A3]"
                   placeholder="John Doe"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="email" className="block text-primary font-medium mb-2">Email Address</label>
+                <label htmlFor="email" className="block text-[#5253A3] font-medium mb-2">Email Address</label>
                 <input
                   type="email"
                   id="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5253A3]"
                   placeholder="john@example.com"
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label htmlFor="subject" className="block text-primary font-medium mb-2">Subject</label>
+                <label htmlFor="subject" className="block text-[#5253A3] font-medium mb-2">Subject</label>
                 <input
                   type="text"
                   id="subject"
                   name="subject"
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5253A3]"
                   placeholder="How can we help you?"
                   required
                 />
               </div>
 
               <div className="mb-6">
-                <label htmlFor="message" className="block text-primary font-medium mb-2">Message</label>
+                <label htmlFor="message" className="block text-[#5253A3] font-medium mb-2">Message</label>
                 <textarea
                   id="message"
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#5253A3]"
                   placeholder="Please provide details about your inquiry..."
                   required
                 />
@@ -186,7 +186,7 @@ const ContactPage = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full btn-primary py-3 text-lg font-semibold flex justify-center items-center gap-2"
+                className="w-full bg-[#5253A3] text-white hover:cursor-pointer py-3 text-lg font-semibold flex justify-center items-center gap-2"
               >
                 {isSubmitting ? (
                   <>

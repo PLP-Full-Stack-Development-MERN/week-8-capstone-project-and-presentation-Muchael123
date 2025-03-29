@@ -9,6 +9,8 @@ import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import { AuthProvider } from "./context/authContext";
 import PrivateRoute from "./components/PrivateRoute";
+import { ToastContainer } from "react-toastify";
+import ConfirmEmail from "./pages/ConfirmEmail";
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
       <Router>
         <div className="min-h-screen bg-[#cad3ff] flex flex-col">
           <Navbar />
+          <ToastContainer />
           <main className="flex-grow">
             <Routes>
               {/* Public Routes */}
@@ -23,12 +26,13 @@ function App() {
               <Route path="/contact-us" element={<ContactPage />} />
               <Route path="/sign-in" element={<SignInPage />} />
               <Route path="/sign-up" element={<SignUpPage />} />
+              <Route path="/confirm-email" element={<ConfirmEmail />} />
 
-              {/* 🔒 Protected Routes */}
               <Route element={<PrivateRoute />}>
                 <Route path="/create-story" element={<CreateStoryPage />} />
                 <Route path="/explore" element={<ExplorePage />} />
                 <Route path="/dashboard" element={<DashboardPage />} />
+
               </Route>
             </Routes>
           </main>

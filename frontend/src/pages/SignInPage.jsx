@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { toast } from 'react-toastify';
+import useAuthStore from '../context/authStore';
 
 const SignInPage = () => {
   const [email, setEmail] = useState('');
@@ -8,22 +10,50 @@ const SignInPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
-
-    // Simulate authentication
-    setTimeout(() => {
+    if(email.trim() === '' || password.trim() === '') {
+      toast.error('Please fill in all fields');
       setIsLoading(false);
-      if (email !== 'test@example.com' || password !== 'password') {
-        setError('Invalid email or password. Please try again.');
-      } else {
-        // Redirect to dashboard or home page after successful login
-        window.location.href = '/dashboard';
+      return;
+    }
+    try{
+      const res = await fetch(`${import.meta.env.VITE_PUBLIC_BACKEND_URL}/api/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        toast.error(data.message);
       }
-    }, 1500);
+      if (res.ok) {
+        //add token to local storage using zustand
+        useAuthStore.setState( state => ({
+          token: data.token,
+          user: data.user,
+        }));
+      }
+      toast.success(data.message || 'Login successful');
+      navigate('/dashboard');
+
+    }catch (error) {
+      //check if internet connection error
+      if (error.message === 'Network Error') {
+        toast.error('Please check your internet connection');
+      }
+      //check if email or password is incorrect
+      console.log(error.message);
+      setError(error.message);
+    }finally {
+      setIsLoading(false);
+    }
+   
   };
 
   return (
